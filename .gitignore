@@ -5,3 +5,5 @@ logs
 .DS_Store
 .idea
 .vscode
+python_tester/.venv/
+
