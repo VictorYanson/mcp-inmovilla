@@ -1,0 +1,29 @@
+{
+  "name": "mcp-inmovilla",
+  "version": "0.0.1",
+  "description": "mcp-inmovilla MCP server",
+  "type": "module",
+  "bin": {
+    "mcp-inmovilla": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && mcp-build",
+    "watch": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "mcp-framework": "^0.2.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.19.0"
+  }
+}

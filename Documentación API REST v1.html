@@ -1,0 +1,3681 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://procesos.apinmo.com/api/v1/apidoc/ -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Documentación API REST v1</title>
+    <meta name="description" content="Documentación API Inmovilla v1">
+    <meta name="author" content="Inmovilla">
+    <link rel="stylesheet" href="./Documentación API REST v1_files/apidoc.css">
+    <script src="./Documentación API REST v1_files/jquery-3.3.1.js"></script>
+    <link href="./Documentación API REST v1_files/css" rel="stylesheet">
+    <script type="text/javascript" src="./Documentación API REST v1_files/apidoc.js"></script>
+</head>
+<body>
+<div id="contenedor">
+    <div id="menuIzquierda">
+
+        <div class="bloqueMenu">
+            <h3 ancla="general">General</h3>
+        </div>
+
+        <div class="bloqueMenu">
+            <h3 ancla="enums">Enums</h3>
+            <ul>
+                <li ancla="enumCalidades">Calidades</li>
+                <li ancla="enumTipos">Tipos</li>
+                <li ancla="enumPaises">Paises</li>
+                <li ancla="enumCiudades">Ciudades</li>
+                <li ancla="enumZonas">Zonas</li>
+            </ul>
+        </div>
+
+        <div class="bloqueMenu">
+            <h3 ancla="clientes">Clientes</h3>
+            <ul>
+                <li ancla="solicitarCliente">Solicitar Cliente</li>
+                <li ancla="crearCliente">Crear Cliente</li>
+                <li ancla="editarCliente">Editar Cliente</li>
+                <li ancla="eliminarCliente">Eliminar Cliente</li>
+                <li ancla="buscarCliente">Buscar Clientes</li>
+                <li ancla="camposClientes">Campos de Clientes</li>
+            </ul>
+        </div>
+
+        <div class="bloqueMenu">
+            <h3 ancla="propiedades">Propiedades / Prospectos</h3>
+            <ul>
+                <li ancla="solicitarPropiedades">Solicitar Propiedad</li>
+                <li ancla="agregarPropiedades">Crear Propiedad</li>
+                <li ancla="actualizarPropiedades">Editar Propiedad</li>        
+                <li ancla="desactivarPropiedades">Desactivar Propiedad</li>
+                <li ancla="listadoPropiedades">Listado de Propiedades</li>
+                <li ancla="camposPropiedades">Campos de Propiedades</li>
+                <li ancla="extraInfoPropiedad">Información Extra</li>
+                <li ancla="leadsPropiedad">Leads</li>
+            </ul>
+        </div>
+
+        <div class="bloqueMenu">
+            <h3 ancla="propietarios">Propietarios</h3>
+            <ul>
+                <li ancla="solicitarPropietario">Solicitar Propietario</li>
+                <li ancla="crearPropietario">Crear Propietario</li>
+                <li ancla="editarPropietario">Editar Propietario</li>
+                <li ancla="eliminarPropietario">Eliminar Propietario</li>
+                <li ancla="camposPropietarios">Campos de Propietarios</li>
+            </ul>
+        </div>
+
+        <div class="bloqueMenu">
+            <h3>Errores</h3>
+            <ul>
+                <li ancla="erroresPropiedades">Errores en Propiedades</li>
+                <li ancla="erroresClientes">Errores en Clientes</li>
+                <li ancla="erroresPropietarios">Errores en Propietarios</li>
+                <li ancla="erroresCalidades">Errores en Calidades</li>
+                <li ancla="erroresTipos">Errores en Tipos</li>
+                <li ancla="erroresZonas">Errores en Zonas</li>
+                <li ancla="limitePeticiones">Límite de Peticiones</li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="contenidoDerecha">
+
+        <h1>Documentación API REST v.1 Inmovilla</h1>
+                <div class="contenedorBloque">
+            <h2 id="general">General</h2>
+            <p>Las peticiones <b>API</b> deben hacerse siempre a la URL <strong>https://procesos.inmovilla.com/api/v1</strong>. Las peticiones que no se realicen vía HTTPS no serán procesadas.</p>
+            <p>Todas las peticiones deberán ir siempre acompañadas de un token que se facilitará desde Inmovilla. Este token se añadirá a los headers con el key "Token", junto con el tipo de formato JSON como aparece en la siguiente tabla. Para utilizar la API debéis solicitarnos un token asociado a vuestra agencia, en la cual se incluirán los datos que enviéis.</p>
+
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 10%">Key</th>
+                    <th style="width: 25%">Value</th>
+                    <th style="width: 65%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Content-Type</td>
+                    <td>application/json</td>
+                    <td class="info">Las peticiones deben ser en formato <b><u>JSON</u></b></td>
+                </tr>
+                <tr>
+                    <td>Token</td>
+                    <td>BBA1C0832599AC50DBAB46AD9CBACB24</td>
+                    <td class="info">Genera el token de tu agencia desde <a href="https://crm.inmovilla.com/panel" target="_blank">Inmovilla</a> entrando en <b>Ajustes &gt; Opciones &gt; Token para API Rest</b>.</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <p style="font-size: .9em;font-style: italic;">
+                    <b>Importante:</b><br>
+                - La API de Inmovilla no debe usarse para hacer cargas masivas diarias de datos, ya que para eso tenemos otros procesos más óptimos por los cuales podéis solicitar información en soporte@inmovilla.com.<br>
+                - Los tokens caducarán automáticamente tras no tener actividad en los últimos 3 meses.
+            </p>
+        </div>
+
+        <div class="contenedorBloque">
+            <h2 id="enums">Enums</h2>
+            <p>Las peticiones ENUM sirven para obtener los valores correctos para cada parámetro. Esta petición está restringida a 2 veces por minuto ya que no debe utilizarse para mapear campos, si no para listar y almacenar los valores para luego enviar los datos de forma correcta.</p>
+
+
+            <h3 id="enumCalidades">Enums - Calidades <span class="metodo get">GET</span></h3>
+            <code class="url">/enums/?calidades</code>
+
+            <p>Se puede obtener el listado de calidades haciendo la petición de calidades, estos campos tendrán los valores <u>true</u> o <u>false</u>, ya que son booleanos.</p>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+[
+    {
+        "campo": "adaptadominus",
+        "valores": "true/false"
+    },
+    {
+        "campo": "agua",
+        "valores": "true/false"
+    },
+    {
+        "campo": "airecentral",
+        "valores": "true/false"
+    },
+    {
+        "campo": "aire_con",
+        "valores": "true/false"
+    },
+    {
+        "campo": "alarma",
+        "valores": "true/false"
+    },
+    ...
+             </code>
+            </pre>
+
+
+
+            <p class="subtitulo" id="erroresCalidades">Posibles errores:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%">Error</th>
+                    <th style="width: 8%">Código</th>
+                    <th style="width: 32%">Error</th>
+                    <th style="width: 55%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>400</td>
+                    <td>400007</td>
+                    <td>No existe el tipo</td>
+                    <td class="info">Para parámetro 'calidades' no es necesario asignarle ningún valor</td>
+                </tr>
+                <tr>
+                    <td>408</td>
+                    <td>408</td>
+                    <td>Demasiadas peticiones</td>
+                    <td class="info">Sólo puedes hacer 2 peticiones cada 60 segundos</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3 id="enumTipos">Enums - Tipos <span class="metodo get">GET</span></h3>
+            <code class="url">/enums/?tipos</code>
+
+            <p>Para obtener el listado completo de los diferentes tipos que contiene una propiedad, y la relación campo-valor de los mismos podemos hacer la petición de <u>tipos</u>, en estos campos se incluyen tipos como el <u>tipo de la propiedad</u>, el <u>tipo de operación</u>, <u>tipo de fachada</u>, etc. La respuesta nos devolverá el nombre de cada tipo con los valores que puede tener, estos tipos se podrán pasar por parámetro en otra petición que se explica después.</p>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+    HTTP/1.0 200 OK
+    {
+    "keyacci": [
+        {
+            "nombre": "Vender",
+            "valor": 1
+        },
+        {
+            "nombre": "Alquilar",
+            "valor": 2
+        }
+    ],
+    "keycarpin": [
+        {
+            "nombre": "Aluminio",
+            "valor": 1
+        },
+        {
+            "nombre": "Madera",
+            "valor": 2
+        },
+        {
+            "nombre": "PVC",
+            "valor": 3
+        },
+        {
+            "nombre": "Wengué",
+            "valor": 16
+        }
+    ],
+    ...
+             </code>
+            </pre>
+
+            <p>Se podrá solicitar un solo tipo si pasarmos por parámetro el nombre del tipo que queremos obtener, nos devolverá el nombre y el valor del campo pasado por parámetro.</p>
+            <code class="url">/enums/?tipos={tipo}</code>
+
+            <p class="subtitulo" id="camposTipos">Tipos:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 20%">Campo</th>
+                    <th style="width: 15%">Tipo</th>
+                    <th style="width: 65%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                                    <tr>
+                        <td>cocina_inde</td>
+                        <td>enum</td>
+                        <td class="info">Cocina independiente</td>
+                    </tr>
+                                    <tr>
+                        <td>conservacion</td>
+                        <td>enum</td>
+                        <td class="info">Conservación / Estado de la propiedad</td>
+                    </tr>
+                                    <tr>
+                        <td>destacado</td>
+                        <td>enum</td>
+                        <td class="info">Propiedad destacada para la web</td>
+                    </tr>
+                                    <tr>
+                        <td>electro</td>
+                        <td>enum</td>
+                        <td class="info">Cocina equipada con electrodomésticos</td>
+                    </tr>
+                                    <tr>
+                        <td>eninternet</td>
+                        <td>enum</td>
+                        <td class="info">Enviar a la web y/o portales inmobiliarios</td>
+                    </tr>
+                                    <tr>
+                        <td>estadoficha</td>
+                        <td>enum</td>
+                        <td class="info">Estado de la propiedad</td>
+                    </tr>
+                                    <tr>
+                        <td>idioma</td>
+                        <td>enum</td>
+                        <td class="info">Listado de idiomas</td>
+                    </tr>
+                                    <tr>
+                        <td>keyacci</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de operación</td>
+                    </tr>
+                                    <tr>
+                        <td>keyagua</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de agua</td>
+                    </tr>
+                                    <tr>
+                        <td>keygua</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de agua</td>
+                    </tr>
+                                    <tr>
+                        <td>keycalefa</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de calefacción</td>
+                    </tr>
+                                    <tr>
+                        <td>keycalle</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de vía</td>
+                    </tr>
+                                    <tr>
+                        <td>keycarpin</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de carpintería</td>
+                    </tr>
+                                    <tr>
+                        <td>keycarpinext</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de carpintería exterior</td>
+                    </tr>
+                                    <tr>
+                        <td>keyelectricidad</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de instalación eléctrica</td>
+                    </tr>
+                                    <tr>
+                        <td>keyfachada</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de fachada</td>
+                    </tr>
+                                    <tr>
+                        <td>keyori</td>
+                        <td>enum</td>
+                        <td class="info">Orientación de la propiedad</td>
+                    </tr>
+                                    <tr>
+                        <td>keysuelo</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de suelo</td>
+                    </tr>
+                                    <tr>
+                        <td>keytecho</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de techo</td>
+                    </tr>
+                                    <tr>
+                        <td>keyvista</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de vista</td>
+                    </tr>
+                                    <tr>
+                        <td>key_loca</td>
+                        <td>enum<span ancla="enumCiudades"></span></td>
+                        <td class="info">Código de la localidad/ciudad. (Véase: Enums - Ciudades)</td>
+                    </tr>
+                                    <tr>
+                        <td>key_tipo</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de propiedad. (Véase: Enums - Tipo Propiedades)</td>
+                    </tr>
+                                    <tr>
+                        <td>key_zona</td>
+                        <td>enum<span ancla="enumZonas"></span></td>
+                        <td class="info">Código de la zona. (Véase: Enums - Zonas)</td>
+                    </tr>
+                                    <tr>
+                        <td>tgascom</td>
+                        <td>enum</td>
+                        <td class="info">Periodicidad de la comunidad</td>
+                    </tr>
+                                    <tr>
+                        <td>tipovpo</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de régimen</td>
+                    </tr>
+                                    <tr>
+                        <td>todoext</td>
+                        <td>enum</td>
+                        <td class="info">Todo exterior</td>
+                    </tr>
+                                    <tr>
+                        <td>x_entorno</td>
+                        <td>enum</td>
+                        <td class="info">Tipo de entornos</td>
+                    </tr>
+                                </tbody>
+            </table>
+
+            <p class="subtitulo" id="erroresTipos">Posibles errores:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%">Error</th>
+                    <th style="width: 8%">Código</th>
+                    <th style="width: 32%">Error</th>
+                    <th style="width: 55%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>404</td>
+                    <td>404001</td>
+                    <td>No existe el tipo</td>
+                    <td class="info">El tipo pasado por parámetro no existe</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>400005</td>
+                    <td>No existe el tipo</td>
+                    <td class="info">key_loca incorrecto (debe ser númerico y separado por ',')</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>400008</td>
+                    <td>Parámetro incorrecto</td>
+                    <td class="info">Para obtener los valores del campo key_loca lanzar esta petición: /enums/?ciudades</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>400009</td>
+                    <td>Parámetro incorrecto</td>
+                    <td class="info">Para obtener los valores del campo key_zona lanzar esta petición: /enums/?zonas={key_loca}</td>
+                </tr>
+                <tr>
+                    <td>408</td>
+                    <td>408</td>
+                    <td>Demasiadas peticiones</td>
+                    <td class="info">Sólo puedes hacer 2 peticiones cada 60 segundos</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3 id="enumPaises">Enums - Paises <span class="metodo get">GET</span></h3>
+            <code class="url">/enums/?paises</code>
+            <p>Podemos hacer la petición de paises para pasarlos por parámetro a las ciudades, para poder obtener las ciudades de cada pais.</p>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+[
+    {
+        "pais": "España",
+        "valor": "724",
+        "iso2": "ES",
+        "iso3": "ESP"
+    },
+    {
+        "pais": "Portugal",
+        "valor": "620",
+        "iso2": "PT",
+        "iso3": "PRT"
+    },
+    {
+        "pais": "Italia",
+        "valor": "380",
+        "iso2": "IT",
+        "iso3": "ITA"
+    },
+    {
+        "pais": "Francia",
+        "valor": "250",
+        "iso2": "FR",
+        "iso3": "FRA"
+    },
+    {
+        "pais": "Reino Unido",
+        "valor": "826",
+        "iso2": "GB",
+        "iso3": "GBR"
+    },
+    {
+        "pais": "Andorra",
+        "valor": "020",
+        "iso2": "AD",
+        "iso3": "AND"
+    },
+    ...
+             </code>
+            </pre>
+
+            <p class="subtitulo" id="erroresPaises">Posibles errores:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%">Error</th>
+                    <th style="width: 8%">Código</th>
+                    <th style="width: 32%">Error</th>
+                    <th style="width: 55%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>408</td>
+                    <td>400008</td>
+                    <td>Parámetro incorrecto</td>
+                    <td class="info">Para parámetro 'paises' no es necesario asignarle ningún valor</td>
+                </tr>
+                <tr>
+                    <td>408</td>
+                    <td>408</td>
+                    <td>Demasiadas peticiones</td>
+                    <td class="info">Sólo puedes hacer 2 peticiones cada 60 segundos</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+            <h3 id="enumCiudades">Enums - Ciudades <span class="metodo get">GET</span></h3>
+            <code class="url">/enums/?ciudades</code>
+
+            <p>Podemos obtener todas las ciudades separadas por provincias. En los resultados irán incluídos los códigos del pais y la provincia a la que pertenece la ciudad/localidad. Por defecto mostará las ciudades de España, pero si quisiéramos listar las ciudades de cuaquier otro pais debemos pasar por parámetro el pais.</p>
+            <code class="url">/enums/?ciudades={pais}</code>
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+[
+    {
+    "pais": 0,
+    "provincia": "ALICANTE",
+    "cod_prov": 4,
+    "ciudades": [
+           {
+            "ciudad": "Adsubia",
+            "key_loca": 31599
+           },
+           {
+            "ciudad": "Agost",
+            "key_loca": 31699
+           },
+           ...
+             </code>
+            </pre>
+
+            <p class="subtitulo" id="erroresCiudades">Posibles errores:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%">Error</th>
+                    <th style="width: 8%">Código</th>
+                    <th style="width: 32%">Error</th>
+                    <th style="width: 55%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>408</td>
+                    <td>400006</td>
+                    <td>Parámetro incorrecto</td>
+                    <td class="info">El parámetro de ciudades (pais) debe ser númerico</td>
+                </tr>
+                <tr>
+                    <td>408</td>
+                    <td>408</td>
+                    <td>Demasiadas peticiones</td>
+                    <td class="info">Sólo puedes hacer 2 peticiones cada 60 segundos</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+            <h3 id="enumZonas">Enums - Zonas <span class="metodo get">GET</span></h3>
+            <code class="url">/enums/?zonas={key_loca}</code>
+
+            <p>Para obtener el listado de zonas de una ciudad debemos pasarle al parámetro <u>zonas</u> el código de la ciudad que deseemos. Por ejemplo, como aparece en el anterior ejemplo como respuesta, la ciudad <u>Agost</u> de Alicante tiene el código <u>31699</u>, por lo que la petición deberá ser <u>zonas=368799</u>. Y con esto obtendremos todas las zonas que existen en dicha ciudad.</p>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+[
+   "31699": [
+      {
+       "zona": "Partida PozoBlanco",
+       "key_zona": 2512711
+      },
+      {
+       "ciudad": "Urb. las lomas",
+       "key_loca": 883111
+      },
+      ...
+             </code>
+            </pre>
+
+            <p>También es posible solicitar zonas de varias ciudades a la vez, para esto debemos solicitarlo con los códigos de ciudades separados por comas. La estructura del resultado será exactamente la misma.</p>
+            <code class="url">/enums/?zonas={key_loca,key_loca,key_loca}</code>
+
+            <p class="subtitulo" id="erroresZonas">Posibles errores:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%">Error</th>
+                    <th style="width: 8%">Código</th>
+                    <th style="width: 32%">Error</th>
+                    <th style="width: 55%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>400</td>
+                    <td>400005</td>
+                    <td>key_loca incorrecto (debe ser númerico y separado por ',')</td>
+                    <td class="info">El key_loca pasado por parámetro debe ser un valor numérico y si son varios, deben estar separado por ','</td>
+                </tr>
+                
+                <tr>
+                    <td>406</td>
+                    <td>400006</td>
+                    <td>Parámetro incorrecto</td>
+                    <td class="info">Para parámetro 'ciudades' no es necesario asignarle ningún valor</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>404002</td>
+                    <td>No existe el key_loca (ciudad)</td>
+                    <td class="info">El código de key_loca solicitado no existe</td>
+
+                </tr><tr>
+                    <td>408</td>
+                    <td>408</td>
+                    <td>Demasiadas peticiones</td>
+                    <td class="info">Sólo puedes hacer 2 peticiones cada 60 segundos</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+        <div class="contenedorBloque">
+            <h2 id="clientes">Clientes</h2>
+            <h3 id="solicitarCliente">Solicitar Cliente <span class="metodo get">GET</span></h3>
+            <code class="url">/clientes/?cod_cli={cod_cli}</code>
+
+            <p>Para obtener un cliente debe solicitarse con el código único del mismo, el parámetro <u>cod_cli</u>.</p>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+{
+    "cod_cli": "13449756",
+    "nombre": "Pedro",
+    "apellidos": "Picapiedra",
+    "nif": "Z7347280G",
+    "email": "pedro@picapiedra.com",
+    "calle": "Av. Libertad",
+    "numero": "123",
+    "planta": "3",
+    "puerta": "der",
+    "escalera": "3",
+    "cp": "03201",
+    "localidad": "Elche",
+    "provincia": "Alicante",
+    "pais": "España",
+    "nacionalidad": "Española",
+    "telefono1": 666554433,
+    "telefono2": 666221100,
+    ...
+}
+             </code>
+            </pre>
+
+
+
+
+
+
+
+
+            <h3 id="crearCliente">Crear Cliente <span class="metodo post">POST</span></h3>
+            <code class="url">/clientes/</code>
+
+            <p>Para crear un cliente es necesario enviar el nombre y los datos más básicos, se creará un cliente sin vinculación alguna. Es posible vincularlo más tarde con la propiedad deseada para convertirlo en propietario.</p>
+
+            <p class="subtitulo">Petición:</p>
+            <pre>             <code class="codigo">
+{
+  "nombre": "Pedro",
+  "apellidos": "Picapiedra",
+  "nif": "12345678K",
+  "email": "pedro.picapiedra@inmovilla.com",
+  "telefono1": 666554433,
+  "telefono2": 666221100,
+  "telefono2": 666001122 
+}
+             </code>
+            </pre>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 201 Created
+{
+    "cod_cli":11223344,
+    "codigo": 201,
+    "mensaje": "Cliente creado y vinculado a la propiedad con cod_ofer 12345678"
+}
+             </code>
+            </pre>
+
+
+
+
+
+            <h3 id="editarCliente">Editar Cliente <span class="metodo put">PUT</span></h3>
+            <code class="url">/clientes/</code>
+
+            <p>Para editar/actualizar un cliente es obligatorio enviar el código del mismo <u>(cod_cli)</u>. Sólo debe enviarse los campos que se van a modificar o añadir, en el ejemplo siguiente actualizaremos la dirección de email.</p>
+
+            <p class="subtitulo">Petición:</p>
+            <pre>             <code class="codigo">
+{
+  "cod_cli": 11223344,
+  "email": "emailejemplo@inmovilla.com"
+}
+             </code>
+            </pre>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 202 Accepted
+{
+    "cod_cli":11223344,
+    "codigo": 202,
+    "mensaje": "Cliente actualizado"
+}
+             </code>
+            </pre>
+
+
+
+
+
+            <h3 id="eliminarCliente">Eliminar Cliente <span class="metodo delete">DELETE</span></h3>
+            <code class="url">/clientes/{cod_cli}</code>
+
+            <p>Para eliminar un cliente tan sólo es necesario hacer la petición DELETE a la url de clientes con el identificador del mismo (<u>cod_cli</u>). El sistema avisará si dicho cliente está vinculado con alguna propiedad o demanda, en dicho caso no se eliminará el cliente, ya que antes habrá que desvincularlo.</p>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+{
+    "codigo": 200,
+    "mensaje": "Cliente eliminado"
+}
+             </code>
+            </pre>
+
+            <p class="subtitulo" id="camposClientes">Campos:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 22%">Campo</th>
+                    <th style="width: 12%">Tipo</th>
+                    <th style="width: 60%">Descripción</th>
+                    <th style="width: 6%">Requerido en</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr>
+                    <td>cod_cli</td>
+                    <td>numérico</td>
+                    <td class="info">Identificador único</td>
+                    <td><span class="metodo get">GET</span><span class="metodo put">PUT</span><span class="metodo delete">DELETE</span></td>
+                </tr>
+                    
+                <tr>
+                    <td>nombre</td>
+                    <td>texto</td>
+                    <td class="info">Nombre del propietario</td>
+                    <td><span class="metodo post">POST</span></td>
+                </tr>
+                    
+                <tr>
+                    <td>apellidos</td>
+                    <td>texto</td>
+                    <td class="info">Apellidos del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>nif</td>
+                    <td>texto</td>
+                    <td class="info">NIF / DNI / CIF</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>email</td>
+                    <td>texto</td>
+                    <td class="info">Dirección de Email / Correo electrónico</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>calle</td>
+                    <td>texto</td>
+                    <td class="info">Nombre de la dirección del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>numero</td>
+                    <td>texto</td>
+                    <td class="info">Número de la dirección del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>planta</td>
+                    <td>numérico</td>
+                    <td class="info">Nº de planta de la dirección del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>puerta</td>
+                    <td>texto</td>
+                    <td class="info">Puerta de la dirección del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>escalera</td>
+                    <td>texto</td>
+                    <td class="info">Escalera de la dirección del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>cp</td>
+                    <td>texto</td>
+                    <td class="info">Código Postal</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>localidad</td>
+                    <td>texto</td>
+                    <td class="info">Localidad / Ciudad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>provincia</td>
+                    <td>texto</td>
+                    <td class="info">Provincia</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>nacionalidad</td>
+                    <td>texto</td>
+                    <td class="info">Nacionalidad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>pais</td>
+                    <td>texto</td>
+                    <td class="info">Pais del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>prefijotel1</td>
+                    <td>numérico</td>
+                    <td class="info">Prefijo teléfono fijo</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>prefijotel2</td>
+                    <td>numérico</td>
+                    <td class="info">Prefijo teléfono móvil</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>prefijotel3</td>
+                    <td>numérico</td>
+                    <td class="info">Prefijo otro teléfono</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>prefijotel4</td>
+                    <td>numérico</td>
+                    <td class="info">Prefijo teléfono fijo cónyuge</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>prefijotel5</td>
+                    <td>numérico</td>
+                    <td class="info">Prefijo teléfono móvil cónyuge</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>telefono1</td>
+                    <td>numérico</td>
+                    <td class="info">Teléfono fijo</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>telefono2</td>
+                    <td>numérico</td>
+                    <td class="info">Teléfono móvil</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>telefono3</td>
+                    <td>numérico</td>
+                    <td class="info">Otro teléfono</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>telefono4</td>
+                    <td>numérico</td>
+                    <td class="info">Teléfono fijo cónyuge</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>telefono5</td>
+                    <td>numérico</td>
+                    <td class="info">Teléfono móvil cónyuge</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>fechanacimiento</td>
+                    <td>fecha</td>
+                    <td class="info">Fecha de Nacimiento (Formato 1984-09-05 23:25:00)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>altacliente</td>
+                    <td>fecha</td>
+                    <td class="info">Fecha de alta del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>conyuge</td>
+                    <td>texto</td>
+                    <td class="info">Nombre del Cónyuge</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>conemail</td>
+                    <td>texto</td>
+                    <td class="info">Dirección de Email del Cónyuge</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>connif</td>
+                    <td>texto</td>
+                    <td class="info">NIF del Cónyuge</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keymedio</td>
+                    <td>numérico</td>
+                    <td class="info">Medio de contacto por el cual ha sido contactado</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keycomercial</td>
+                    <td>numérico</td>
+                    <td class="info">Identificador único del comercial (Gestionado por)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>captadopor</td>
+                    <td>numérico</td>
+                    <td class="info">Identificador único del comercial (Captado por)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>observacion</td>
+                    <td>texto</td>
+                    <td class="info">Observaciones</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>nonewsletters</td>
+                    <td>numérico</td>
+                    <td class="info">Newsletters: 0 Pendiente - 3 Validado Oficina - 1 Rechazado - 6 Fallo Entrega</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>gesauto</td>
+                    <td>numérico</td>
+                    <td class="info">Envío de prop. por email: 0 Pendiente - 2 Validado Oficina - 4 Rechazado - 5 Validado Portal - 6 Fallo Entrega</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rgpdwhats</td>
+                    <td>numérico</td>
+                    <td class="info">Envío de prop. por Whatsapp: 0 Pendiente - 2 Validado Oficina - 4 Rechazado - 5 Validado Portal - 6 Fallo Entrega</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>enviosauto</td>
+                    <td>booleano</td>
+                    <td class="info">Activar que al cliente se le envíen mails de manera automática (siempre y cuando no entre en conflicto con el campo gesauto)</td>
+                    <td></td>
+                </tr>
+                                    </tbody>
+            </table>
+
+
+            <h3 id="buscarCliente">Buscar un Cliente <span class="metodo get">GET</span></h3>
+            <code class="url">/clientes/buscar/?telefono={telefono}&amp;email={email}</code>
+
+            <p>Podrás hacer búsquedas de clientes buscando los contactos coincidentes con el teléfono y el email. El campo <u>telefono</u> buscará internamente en los tres campos de teléfonos disponibles de cada cliente. Los parámetros se concatenarán como un AND, es decir, si pasamos tanto el parámetro <u>telefono</u> como el <u>email</u> buscará clientes que cumplan con los dos parámetros.</p>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+{
+    "cod_cli": "13449756",
+    "nombre": "Pedro",
+    "apellidos": "Picapiedra",
+    "nif": "Z7347280G",
+    "email": "pedro@picapiedra.com",
+    "calle": "Piedradura",
+    "numero": "45",
+    "...": "...",
+    "agente": {
+            "id": "12326",
+            "nombre": "Antonio",
+            "apellidos": "Piedraita",
+            "email": "apiedraita@piedraita.com",
+            "email_interno": "apiedraita.4856@inmovilla.com",
+            "telefono1": "65564646578",
+            "telefono2": "96556568964"
+    }
+},
+{
+    "cod_cli": "163541487",
+    "nombre": "Pablo",
+    "apellidos": "Mármol",
+    "nif": "75462806T",
+    "email": "pablo@marmol.com",
+    "calle": "Piedradura",
+    "numero": "48",
+    "...": "...",
+    "agente": {
+            "id": "123456",
+            "nombre": "Amparo",
+            "apellidos": "Piedrolar",
+            "email": "apiedrolar@piedradura.com",
+            "email_interno": "apiedrolar.4565@inmovilla.com",
+            "telefono1": "65498416478",
+            "telefono2": "96546548964"
+    }
+}
+             </code>
+            </pre>
+
+
+            <p class="subtitulo" id="erroresClientes">Posibles errores:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%">Error</th>
+                    <th style="width: 8%">Código</th>
+                    <th style="width: 32%">Error</th>
+                    <th style="width: 55%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>400</td>
+                    <td>400001</td>
+                    <td>Petición Errónea</td>
+                    <td class="info">Petición mal formada, comprueba que el contenido ha sido bien parseado.</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>400002</td>
+                    <td>Petición Errónea</td>
+                    <td class="info">No se han enviado parámetros.</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>400003</td>
+                    <td>Error al guardar</td>
+                    <td class="info">Ha ocurrido un error al crear, editar o eliminar el cliente</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>404002</td>
+                    <td>Sin resultados</td>
+                    <td class="info">No existe ningún cliente con los parámetros solicitados.</td>
+                </tr>
+                <tr>
+                    <td>405</td>
+                    <td>405001</td>
+                    <td>Método no permitido</td>
+                    <td class="info">El método solicitado no está disponible (GET, POST, PUT, DELETE, etc.)</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406001</td>
+                    <td>Campo {x} requerido</td>
+                    <td class="info">El campo {x} es obligatorio y no ha sido enviado.</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406002</td>
+                    <td>Campo {x} no válido</td>
+                    <td class="info">El campo {x} no es válido o está mal escrito.</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406004</td>
+                    <td>Cliente vinculado</td>
+                    <td class="info">El cliente está vinculado (propiedad o demanda) y no se puede eliminar</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406006</td>
+                    <td>Código no existe</td>
+                    <td class="info">El código {x} facilitado no existe</td>
+                </tr>
+                <tr>
+                    <td>408</td>
+                    <td>408</td>
+                    <td>Demasiadas peticiones</td>
+                    <td class="info">Límite de 20 peticiones de clientes cada minuto</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+        <div class="contenedorBloque">
+            <h2 id="propiedades">Propiedades y Prospectos</h2>
+
+            <h3 id="solicitarPropiedades">Solicitar Propiedad o Prospecto <span class="metodo get">GET</span></h3>
+            <code class="url">/propiedades/?cod_ofer={cod_ofer}</code>
+
+            <p>Para obtener los datos de una propiedad puede solicitarse de varias maneras. En la siguiente tabla se detallan las distintas posibilidades. La prioridad se utiliza si se envían varios parámetros, en este caso el sistema dará más importancia a los parámetros de prioridad alta.</p>
+
+            <h4 id="solicitarPropiedades">Fotografías de una Propiedad o Prospecto</h4>
+
+            <p>Las <strong>fotos</strong> de un inmueble se obtienen construyendo la URL utilizando ciertos parámetros.</p>
+
+            <code>
+            Ejemplo de URL:: https://fotos15.inmovilla.com/413/9983361/8-1.jpg
+
+            | Parámetro    | Descripción                                     |
+            | ------------ | ----------------------------------------------- |
+            | `numagencia` | ID de agencia (por ejemplo, 413)                |
+            | `cod_ofer`   | Código del inmueble (por ejemplo, 9983361)      |
+            | `fotoletra`  | Identificador base de la foto (por ejemplo, 8)  |
+            | `numfotos`   | Número incremental de la foto (empieza en 1 y acaba en numfotos)
+
+            La url se compone de la siguiente manera: https://fotos15.inmovilla.com/{numagencia}/{cod_ofer}/{fotoletra}-{N}.jpg
+
+            N representa el número de la foto. Si una propiedad tiene numfotos = N, entonces debes generar N URLs, incrementando X desde 1 hasta N.
+            </code>
+
+            <p class="subtitulo">Parametros:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 10%">Parámetro</th>
+                    <th style="width: 85%">Descripción</th>
+                    <th style="width: 5%">Prioridad</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>cod_ofer</td>
+                    <td class="info">Código único de la propiedad.</td>
+                    <td>Alta</td>
+                </tr>
+                <tr>
+                    <td>ref</td>
+                    <td class="info">Puede solicitarse con la referencia pública de la propiedad.</td>
+                    <td>Baja</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+{
+  "cod_ofer": 87654321,
+  "keyacci": 1,
+  "banyos": 2,
+  "keycli": 12345678,
+  "fecha": "2018-09-05 11:15:00",
+  "keyori": 0,
+  "ref": "ABC-63653",
+  "nodisponible": 0,
+  "precio": 115000,
+  "precioinmo": 120000,
+  "key_loca": 37899,
+  "key_zona": 1214099,
+  "key_tipo": 3399,
+  "calle": "Avenida Libertad",
+  "planta": 5,
+  "numero": 123,
+   ...
+}
+             </code>
+            </pre>
+
+
+
+            <h3 id="agregarPropiedades">Crear Propiedad o Prospecto <span class="metodo post">POST</span></h3>
+            <code class="url">/propiedades/</code>
+
+            <p>Para crear propiedades deben enviarse en formato JSON con sus valores correspondientes. Es posible crear prospectos tan sólo enviando el parámetro <u>prospecto</u> a <u>true</u>. Para enviar las imágenes existe el parámetro <u>fotos</u> el cual será un objeto que debe incluir las urls de las fotografías. El orden de las fotos será el mismo de los índices, aunque es posible enviar el parámetro <u>posicion</u> para forzarles un orden diferente al del propio objeto. El sistema detectará en las modificaciones que se envíen si la url es la misma o diferente, si la url no cambia las fotos no se sobreescribirán, para sobreescribirlas es necesario que la url de la foto sea diferente.</p>
+
+            <p class="subtitulo">Petición:</p>
+            <pre>             <code class="codigo">
+{
+  "ref": "36532543",
+  "keyacci": 1,
+  "key_tipo": 3399,
+  "key_loca": "368799",
+  "nodisponible": false,
+  "precioinmo": 250000,
+  "banyos": 3,
+  "habitaciones": 2,
+  "fotos": {
+    "1": {
+      "url": "https://crm.inmovilla.com/imagenes/foto001.jpg",
+      "posicion": 1
+    },
+    "2": {
+      "url": "https://crm.inmovilla.com/imagenes/foto002.jpg",
+      "posicion": 2
+    }
+  }
+}
+             </code>
+            </pre>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 201 Created
+{
+    "codigo": 201,
+    "mensaje": "Propiedad guardada"
+}
+             </code>
+            </pre>
+
+
+            <p class="subtitulo" id="camposPropiedades">Campos:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 18%">Campo</th>
+                    <th style="width: 11%">Tipo</th>
+                    <th style="width: 58%">Descripción</th>
+                    <th style="width: 12%">Requerido en</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr>
+                    <td>adaptadominus</td>
+                    <td>booleano</td>
+                    <td class="info">Adaptado PMR (Personas Movilidad Reducida)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>agua</td>
+                    <td>booleano</td>
+                    <td class="info">Agua</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>airecentral</td>
+                    <td>booleano</td>
+                    <td class="info">Aire central</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>aire_con</td>
+                    <td>booleano</td>
+                    <td class="info">Aire acondicionado</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>alarma</td>
+                    <td>booleano</td>
+                    <td class="info">Alarma</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>alarmaincendio</td>
+                    <td>booleano</td>
+                    <td class="info">Alarma de incendio</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>alarmarobo</td>
+                    <td>booleano</td>
+                    <td class="info">Alarma de robo</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>alta_exclusiva</td>
+                    <td>fecha</td>
+                    <td class="info">Fecha de inicio de exclusiva (Formato 2018-06-05 18:30:15)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>altillo</td>
+                    <td>numérico</td>
+                    <td class="info">Altillo</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>alturatecho</td>
+                    <td>numérico</td>
+                    <td class="info">Altura del techo</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>antiguedad</td>
+                    <td>numérico</td>
+                    <td class="info">Año de construcción</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>apartseparado</td>
+                    <td>booleano</td>
+                    <td class="info">Apartamento separado</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>arboles</td>
+                    <td>booleano</td>
+                    <td class="info">Árboles</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>arma_empo</td>
+                    <td>booleano</td>
+                    <td class="info">Armario empotrado</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>ascensor</td>
+                    <td>booleano</td>
+                    <td class="info">Ascensor</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>aseos</td>
+                    <td>numérico</td>
+                    <td class="info">Aseos</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>autobuses</td>
+                    <td>booleano</td>
+                    <td class="info">Autobuses</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>baja_exclusiva</td>
+                    <td>fecha</td>
+                    <td class="info">Fecha de fin de exclusiva (Formato 2018-06-05 18:30:15)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>balcon</td>
+                    <td>booleano</td>
+                    <td class="info">Balcón</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>banyos</td>
+                    <td>numérico</td>
+                    <td class="info">Baños</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>bar</td>
+                    <td>booleano</td>
+                    <td class="info">Bar</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>barbacoa</td>
+                    <td>booleano</td>
+                    <td class="info">Barbacoa</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>bombafriocalor</td>
+                    <td>booleano</td>
+                    <td class="info">Bomba frío/calor</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>buhardilla</td>
+                    <td>booleano</td>
+                    <td class="info">Buhardilla</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>cajafuerte</td>
+                    <td>booleano</td>
+                    <td class="info">Caja fuerte</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>calefaccion</td>
+                    <td>booleano</td>
+                    <td class="info">Calefacción</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>calefacentral</td>
+                    <td>booleano</td>
+                    <td class="info">Calefacción central</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>calle</td>
+                    <td>texto</td>
+                    <td class="info">Dirección</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>captadopor</td>
+                    <td>numérico</td>
+                    <td class="info">Código del agente captador</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>centrico</td>
+                    <td>booleano</td>
+                    <td class="info">Céntrico</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>centros_comerciales</td>
+                    <td>booleano</td>
+                    <td class="info">Centros comerciales</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>centros_medicos</td>
+                    <td>booleano</td>
+                    <td class="info">Centros Médicos</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>cerca_de_universidad</td>
+                    <td>booleano</td>
+                    <td class="info">Cerca de la Universidad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>cesioncom</td>
+                    <td>numérico</td>
+                    <td class="info">Comisión de cesión</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>chimenea</td>
+                    <td>booleano</td>
+                    <td class="info">Chimenea</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>cocina_inde</td>
+                    <td>enum</td>
+                    <td class="info">Cocina independiente</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>colegios</td>
+                    <td>booleano</td>
+                    <td class="info">Colegios</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>comision</td>
+                    <td>numérico</td>
+                    <td class="info">Comisión</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>comunidadincluida</td>
+                    <td>booleano</td>
+                    <td class="info">Si viene incluida la cuota de la comunidad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>conservacion</td>
+                    <td>enum</td>
+                    <td class="info">Conservación / Estado de la propiedad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>contactadopor</td>
+                    <td>texto</td>
+                    <td class="info">Medio por el que ha sido contactado/captado el inmueble</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>costa</td>
+                    <td>booleano</td>
+                    <td class="info">Costa</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>cp</td>
+                    <td>texto</td>
+                    <td class="info">Código postal</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>depoagua</td>
+                    <td>booleano</td>
+                    <td class="info">Depósito de agua</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>descalcificador</td>
+                    <td>booleano</td>
+                    <td class="info">Descalcificador</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>descripcionaleman</td>
+                    <td>texto</td>
+                    <td class="info">Descripción en Alemán</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>descripcioncatalan</td>
+                    <td>texto</td>
+                    <td class="info">Descripción en Catalán</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>descripciones</td>
+                    <td>texto</td>
+                    <td class="info">Descripción en Castellano/Español</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>descripcionfrances</td>
+                    <td>texto</td>
+                    <td class="info">Descripción en Francés</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>descripcioningles</td>
+                    <td>texto</td>
+                    <td class="info">Descripción en Inglés</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>descripcionruso</td>
+                    <td>texto</td>
+                    <td class="info">Descripción en Ruso</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>despensa</td>
+                    <td>booleano</td>
+                    <td class="info">Despensa</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>destacado</td>
+                    <td>enum</td>
+                    <td class="info">Propiedad destacada para la web</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>diafano</td>
+                    <td>booleano</td>
+                    <td class="info">Diáfano</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>distmar</td>
+                    <td>numérico</td>
+                    <td class="info">Distancia al mar (en metros)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>electro</td>
+                    <td>enum</td>
+                    <td class="info">Cocina equipada con electrodomésticos</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>emisionesletra</td>
+                    <td>texto</td>
+                    <td class="info">Emisiones (Letra del certificado de emisiones)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>emisionesvalor</td>
+                    <td>numérico</td>
+                    <td class="info">Emisiones (valor en Kg CO2/m2)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>energialetra</td>
+                    <td>texto</td>
+                    <td class="info">Energía (Letra del certificado energético)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>energiarecibido</td>
+                    <td>numérico</td>
+                    <td class="info">Estado del certificado energético: 0 Certificado Pendiente - 1 Aportado - 2 En Trámites - 3 Exento</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>energiavalor</td>
+                    <td>numérico</td>
+                    <td class="info">Energía (consumo en KW h/m2)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>eninternet</td>
+                    <td>enum</td>
+                    <td class="info">Enviar a la web y/o portales inmobiliarios</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>entidadbancaria</td>
+                    <td>numérico</td>
+                    <td class="info">Entidad bancaria</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>escalera</td>
+                    <td>texto</td>
+                    <td class="info">Dirección (Escalera)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>esquina</td>
+                    <td>booleano</td>
+                    <td class="info">Esquina</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>estadoficha</td>
+                    <td>enum</td>
+                    <td class="info">Estado de la propiedad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>exclu</td>
+                    <td>booleano</td>
+                    <td class="info">La propiedad está en exclusiva</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>fecha</td>
+                    <td>fecha</td>
+                    <td class="info">Fecha de alta (Formato 2018-06-05 18:30:15)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>fechaact</td>
+                    <td>fecha</td>
+                    <td class="info">Fecha de última actualización (Formato 2018-06-05 18:30:15)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>fechamod</td>
+                    <td>fecha</td>
+                    <td class="info">Fecha de modificación (Formato 2018-06-05 18:30:15)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>galeria</td>
+                    <td>booleano</td>
+                    <td class="info">Galería</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>garajedoble</td>
+                    <td>booleano</td>
+                    <td class="info">Garaje doble</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>gasciudad</td>
+                    <td>booleano</td>
+                    <td class="info">Gas ciudad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>gastos_com</td>
+                    <td>numérico</td>
+                    <td class="info">Cuota de la comunidad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>gimnasio</td>
+                    <td>booleano</td>
+                    <td class="info">Gimnasio</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>golf</td>
+                    <td>booleano</td>
+                    <td class="info">Golf</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>habdobles</td>
+                    <td>numérico</td>
+                    <td class="info">Habitaciones dobles</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>habitaciones</td>
+                    <td>numérico</td>
+                    <td class="info">Habitaciones simples</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>habjuegos</td>
+                    <td>booleano</td>
+                    <td class="info">Habitación de juegos</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>haycartel</td>
+                    <td>booleano</td>
+                    <td class="info">Tiene cartel de venta/alquiler colocado</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>hidromasaje</td>
+                    <td>booleano</td>
+                    <td class="info">Hidromasaje</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>hilomusical</td>
+                    <td>booleano</td>
+                    <td class="info">Hilo musical</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>hospitales</td>
+                    <td>booleano</td>
+                    <td class="info">Hospitales</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>jacuzzi</td>
+                    <td>booleano</td>
+                    <td class="info">Jacuzzi</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>jardin</td>
+                    <td>booleano</td>
+                    <td class="info">Jardín</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keyacci</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de operación</td>
+                    <td><span class="metodo post">POST</span></td>
+                </tr>
+                    
+                <tr>
+                    <td>keyagente</td>
+                    <td>numérico</td>
+                    <td class="info">Código del agente gestor</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keyagua</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de agua</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keycalefa</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de calefacción</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keycalle</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de vía</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keycarpin</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de carpintería</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keycarpinext</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de carpintería exterior</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keyelectricidad</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de instalación eléctrica</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keyfachada</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de fachada</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keygua</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de agua</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keyori</td>
+                    <td>enum</td>
+                    <td class="info">Orientación de la propiedad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keysuelo</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de suelo</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keytecho</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de techo</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>keyvista</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de vista</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>key_loca</td>
+                    <td>enum</td>
+                    <td class="info">Código de la localidad/ciudad. (Véase: Enums - Ciudades)</td>
+                    <td><span class="metodo post">POST</span></td>
+                </tr>
+                    
+                <tr>
+                    <td>key_tipo</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de propiedad. (Véase: Enums - Tipo Propiedades)</td>
+                    <td><span class="metodo post">POST</span></td>
+                </tr>
+                    
+                <tr>
+                    <td>key_zona</td>
+                    <td>enum</td>
+                    <td class="info">Código de la zona. (Véase: Enums - Zonas)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>latitud</td>
+                    <td>numérico</td>
+                    <td class="info">Coordenada (Latitud)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>lavanderia</td>
+                    <td>booleano</td>
+                    <td class="info">Lavandería</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>linea_tlf</td>
+                    <td>booleano</td>
+                    <td class="info">Línea telefónica</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>longitud</td>
+                    <td>numérico</td>
+                    <td class="info">Coordenada (Longitud)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>luminoso</td>
+                    <td>booleano</td>
+                    <td class="info">Luminoso</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>luz</td>
+                    <td>booleano</td>
+                    <td class="info">Luz</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>metro</td>
+                    <td>booleano</td>
+                    <td class="info">Metro</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>mirador</td>
+                    <td>booleano</td>
+                    <td class="info">Mirador</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>montacargas</td>
+                    <td>booleano</td>
+                    <td class="info">Montacargas</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>montana</td>
+                    <td>booleano</td>
+                    <td class="info">Montaña</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>muebles</td>
+                    <td>booleano</td>
+                    <td class="info">Muebles</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>m_altillo</td>
+                    <td>numérico</td>
+                    <td class="info">Metros del altillo</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>m_cocina</td>
+                    <td>numérico</td>
+                    <td class="info">Metros de la cocina</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>m_comedor</td>
+                    <td>numérico</td>
+                    <td class="info">Metros del comedor</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>m_cons</td>
+                    <td>numérico</td>
+                    <td class="info">Metros construidos</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>m_fachada</td>
+                    <td>numérico</td>
+                    <td class="info">Metros de la fachada</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>m_parcela</td>
+                    <td>numérico</td>
+                    <td class="info">Metros de la parcela</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>m_sotano</td>
+                    <td>numérico</td>
+                    <td class="info">Metros del sótano</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>m_terraza</td>
+                    <td>numérico</td>
+                    <td class="info">Metros de la terraza</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>m_utiles</td>
+                    <td>numérico</td>
+                    <td class="info">Metros útiles</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>nodisponible</td>
+                    <td>booleano</td>
+                    <td class="info">Si la propiedad no está disponible</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>nplazasparking</td>
+                    <td>numérico</td>
+                    <td class="info">Cantidad de plazas de parking</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>numero</td>
+                    <td>texto</td>
+                    <td class="info">Dirección (Número del portal)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>numllave</td>
+                    <td>texto</td>
+                    <td class="info">Número de llavero</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>numplanta</td>
+                    <td>numérico</td>
+                    <td class="info">Dirección (Número total de plantas)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>numsucursal</td>
+                    <td>numérico</td>
+                    <td class="info">Id de la agencia sucursal</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>ojobuey</td>
+                    <td>booleano</td>
+                    <td class="info">Ojos de buey</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>opcioncompra</td>
+                    <td>booleano</td>
+                    <td class="info">La propiedad tiene opción a compra</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>outlet</td>
+                    <td>numérico</td>
+                    <td class="info">Precio anterior del inmueble (por si se ha rebajado)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>parking</td>
+                    <td>numérico</td>
+                    <td class="info">Parking</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>parques</td>
+                    <td>booleano</td>
+                    <td class="info">Parques</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>patio</td>
+                    <td>booleano</td>
+                    <td class="info">Patio</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>pergola</td>
+                    <td>booleano</td>
+                    <td class="info">Pérgola</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>piscina_com</td>
+                    <td>booleano</td>
+                    <td class="info">Piscina comunitaria</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>piscina_prop</td>
+                    <td>booleano</td>
+                    <td class="info">Piscina propia</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>planta</td>
+                    <td>numérico</td>
+                    <td class="info">Dirección (Nº de planta)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>plaza_gara</td>
+                    <td>numérico</td>
+                    <td class="info">Plaza de garaje</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>porceniva</td>
+                    <td>numérico</td>
+                    <td class="info">Porcentaje del IVA</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>precioalq</td>
+                    <td>numérico</td>
+                    <td class="info">Precio de Alquiler</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>precioinmo</td>
+                    <td>numérico</td>
+                    <td class="info">Precio de la propiedad para la inmobiliaria</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>precioiva</td>
+                    <td>numérico</td>
+                    <td class="info">IVA del precio</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>preciotraspaso</td>
+                    <td>numérico</td>
+                    <td class="info">Precio del traspaso de la propiedad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>preinstaacc</td>
+                    <td>booleano</td>
+                    <td class="info">Preinstalación del aire acondicionado</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>preinsthmusi</td>
+                    <td>booleano</td>
+                    <td class="info">Preinstalación de hilo musical</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>primera_linea</td>
+                    <td>booleano</td>
+                    <td class="info">Si está en primera línea</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>prospecto</td>
+                    <td>booleano</td>
+                    <td class="info">Indica si la propiedad es un prospecto</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>puerta</td>
+                    <td>texto</td>
+                    <td class="info">Dirección (Puerta)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>puertasauto</td>
+                    <td>booleano</td>
+                    <td class="info">Puertas automáticas</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>puerta_blin</td>
+                    <td>booleano</td>
+                    <td class="info">Puerta blindada</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rcatastral</td>
+                    <td>texto</td>
+                    <td class="info">Dato catastral (Referencia catastral)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rdirfinca</td>
+                    <td>texto</td>
+                    <td class="info">Dato catastral (Dirección de la finca)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>ref</td>
+                    <td>texto</td>
+                    <td class="info">Referencia de la propiedad (Debe ser única para cada propiedad)</td>
+                    <td><span class="metodo post">POST</span></td>
+                </tr>
+                    
+                <tr>
+                    <td>registrod</td>
+                    <td>texto</td>
+                    <td class="info">Dato catastral (Registro)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rfolio</td>
+                    <td>numérico</td>
+                    <td class="info">Dato catastral (Folio)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>riegoauto</td>
+                    <td>booleano</td>
+                    <td class="info">Riego automático</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rletra</td>
+                    <td>texto</td>
+                    <td class="info">Dato catastral (Letra)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rlibro</td>
+                    <td>numérico</td>
+                    <td class="info">Dato catastral (Libro)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rnumero</td>
+                    <td>numérico</td>
+                    <td class="info">Dato catastral (Número)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rnumeroinscr</td>
+                    <td>numérico</td>
+                    <td class="info">Dato catastral (Número inscripción)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rtomo</td>
+                    <td>numérico</td>
+                    <td class="info">Dato catastral (Tomo)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rural</td>
+                    <td>booleano</td>
+                    <td class="info">Rural</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>salon</td>
+                    <td>numérico</td>
+                    <td class="info">Salón</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>satelite</td>
+                    <td>booleano</td>
+                    <td class="info">Satélite</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>sauna</td>
+                    <td>booleano</td>
+                    <td class="info">Sauna</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>solarium</td>
+                    <td>booleano</td>
+                    <td class="info">Solarium</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>sotano</td>
+                    <td>booleano</td>
+                    <td class="info">Sótano</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>supermercados</td>
+                    <td>booleano</td>
+                    <td class="info">Supermercados</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tenis</td>
+                    <td>booleano</td>
+                    <td class="info">Pista de tenis propia</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>teniscom</td>
+                    <td>booleano</td>
+                    <td class="info">Pista de tenis comunitaria</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>terraza</td>
+                    <td>booleano</td>
+                    <td class="info">Terraza</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>terrazaacris</td>
+                    <td>booleano</td>
+                    <td class="info">Terraza acristalada</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tfachada</td>
+                    <td>texto</td>
+                    <td class="info">Descripción del fachada</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tgascom</td>
+                    <td>enum</td>
+                    <td class="info">Periodicidad de la comunidad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tinterior</td>
+                    <td>texto</td>
+                    <td class="info">Descripción del interior</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tipomensual</td>
+                    <td>texto</td>
+                    <td class="info">Periodicidad del alquiler</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tipovpo</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de régimen</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tituloaleman</td>
+                    <td>texto</td>
+                    <td class="info">Título en Alemán</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>titulocatalan</td>
+                    <td>texto</td>
+                    <td class="info">Título en Catalán</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tituloes</td>
+                    <td>texto</td>
+                    <td class="info">Título en Castellano/Español</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>titulofrances</td>
+                    <td>texto</td>
+                    <td class="info">Título en Francés</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tituloingles</td>
+                    <td>texto</td>
+                    <td class="info">Título en Inglés</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tituloruso</td>
+                    <td>texto</td>
+                    <td class="info">Título en Ruso</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>todoext</td>
+                    <td>enum</td>
+                    <td class="info">Todo exterior</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tranvia</td>
+                    <td>booleano</td>
+                    <td class="info">Tranvía</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>trastero</td>
+                    <td>booleano</td>
+                    <td class="info">Trastero</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tren</td>
+                    <td>booleano</td>
+                    <td class="info">Tren</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>trifasica</td>
+                    <td>booleano</td>
+                    <td class="info">Sistema eléctrico trifásico</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>tv</td>
+                    <td>booleano</td>
+                    <td class="info">Televisión</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>urbanizacion</td>
+                    <td>booleano</td>
+                    <td class="info">Urbanización</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>urlprospecto</td>
+                    <td>texto</td>
+                    <td class="info">URL del prospecto captado</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>vallado</td>
+                    <td>booleano</td>
+                    <td class="info">Vallado</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>vestuarios</td>
+                    <td>booleano</td>
+                    <td class="info">Vestuarios</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>video_port</td>
+                    <td>booleano</td>
+                    <td class="info">Videoportero</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>vigilancia_24</td>
+                    <td>booleano</td>
+                    <td class="info">Vigilancia 24H</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>vistasalmar</td>
+                    <td>booleano</td>
+                    <td class="info">Tiene vistas al mar</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>x_entorno</td>
+                    <td>enum</td>
+                    <td class="info">Tipo de entornos</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>zona</td>
+                    <td>texto</td>
+                    <td class="info">Si no se envía key_zona, se puede enviar el nombre de la zona aquí.</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>zonasinfantiles</td>
+                    <td>booleano</td>
+                    <td class="info">Zonas infantiles</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>zona_de_paso</td>
+                    <td>booleano</td>
+                    <td class="info">Zona de Paso</td>
+                    <td></td>
+                </tr>
+                                    <tr>
+                    <td>fotos</td>
+                    <td>objeto</td>
+                    <td class="info">Debe ser un objeto que contenga las url de las fotografías.</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+
+            <p class="subtitulo" id="erroresPropiedades">Posibles errores:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%">Error</th>
+                    <th style="width: 8%">Código</th>
+                    <th style="width: 32%">Error</th>
+                    <th style="width: 55%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>400</td>
+                    <td>400001</td>
+                    <td>Petición Errónea</td>
+                    <td class="info">Petición mal formada, comprueba que el contenido ha sido bien parseado.</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>400002</td>
+                    <td>Petición Errónea</td>
+                    <td class="info">No se han enviado parámetros.</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>400003</td>
+                    <td>Error al guardar la propiedad</td>
+                    <td class="info">Ocurrió un error al guardar la propiedad.</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>400004</td>
+                    <td>Error al insertar la propiedad</td>
+                    <td class="info">Ocurrió un error al insertar la propiedad.</td>
+                </tr>
+                <tr>
+                    <td>405</td>
+                    <td>405001</td>
+                    <td>Método no permitido</td>
+                    <td class="info">El método solicitado no está disponible (GET, POST, PUT, DELETE, etc.)</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406001</td>
+                    <td>Campo {x} requerido</td>
+                    <td class="info">El campo {x} es obligatorio y no ha sido enviado.</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406002</td>
+                    <td>Campo {x} no válido</td>
+                    <td class="info">El campo {x} no es válido o está mal escrito.</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406003</td>
+                    <td>Error al actualizar prospecto</td>
+                    <td class="info">El prospecto que se intenta actualizar ya ha sido convertido a propiedad (se facilita la referencia de dicha propiedad).</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <h3 id="actualizarPropiedades">Editar Propiedad o Prospecto <span class="metodo post">POST</span></h3>
+            <p>Para actualizar una propiedad debe utilizarse el mismo método que el de agregar, igualmente enviando todos los campos ya que la API actualizará todos los valores de nuevo. En este caso es el campo <u>ref</u> el que se utilizará para identificar y actualizar la propiedad. Es posible pasar de una propiedad a prospecto y viceversa, tan sólo debéis enviar el parámetro <u>prospecto</u> con el valor deseado. <b>Muy importante enviar la referencia exacta en cada petición.</b></p>
+
+            <h3 id="desactivarPropiedades">Desactivar Propiedad o Prospecto  <span class="metodo post">POST</span></h3>
+            <p>Dar de baja una propiedad debe utilizarse el mismo método que el de agregar, igualmente enviando todos los campos ya que la API actualizará todos los valores de nuevo. En este caso es el campo <u>ref</u> el que se utilizará para identificar la propiedad. En este caso habrá que enviar el valor de <u>nodisponible</u> a <u>true</u>. <b>Muy importante enviar la referencia exacta en cada petición.</b></p>
+            
+            <h3 id="listadoPropiedades">Listar Propiedades y Prospectos <span class="metodo get">GET</span></h3>
+            <code class="url">/propiedades/?listado</code>
+
+            <p>Puedes extraer el listado de propiedades y prospectos ordenados por fecha de actualización. Ten en cuenta que los prospectos que tengan la referencia vacía no se mostrarán en este listado.</p>
+            
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+[
+    {
+        "cod_ofer": 8284709,
+        "ref": "PR00182",
+        "nodisponible": false,
+        "prospecto": true,
+        "fechaact": "2018-09-20 10:12:25"
+    },
+    {
+        "cod_ofer": 8284690,
+        "ref": "PR00180",
+        "nodisponible": false,
+        "prospecto": true,
+        "fechaact": "2018-09-19 17:10:07"
+    },
+    {
+        "cod_ofer": 8284650,
+        "ref": "PR00178",
+        "nodisponible": false,
+        "prospecto": true,
+        "fechaact": "2018-09-19 17:05:02"
+    },
+    {
+    ...
+]
+             </code>
+            </pre>
+
+            <h3 id="extraInfoPropiedad">Información Extra de la Propiedad <span class="metodo get">GET</span></h3>
+            <code class="url">/propiedades/?extrainfo&amp;cod_ofer={cod_ofer}</code>
+
+            <p>Puedes extraer información extra de la propiedad como por ejemplo la información de publicación en portales.</p>
+
+            <p class="subtitulo">Parametros:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 10%">Parámetro</th>
+                    <th style="width: 85%">Descripción</th>
+                    <th style="width: 5%">Prioridad</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>cod_ofer</td>
+                    <td class="info">Código único de la propiedad de la que se quiere obtener la información.</td>
+                    <td>Alta</td>
+                </tr>
+                <tr>
+                    <td>ref</td>
+                    <td class="info">Puede solicitarse con la referencia de la propiedad de la que se quiere obtener la información.</td>
+                    <td>Media</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+[
+    "publishinfo": {
+        "idealista": {
+            "state": "11",
+            "message": "Sent successfully.",
+            "alerts_number": "12345",
+            "quality_percentage": "62",
+            "publication_url": "https://www.idealista.com/inmueble/123456789"
+        },
+        "pisoscom": {
+            "state": "10",
+            "message": "Sent successfully.",
+            "publication_url": "https://www.pisos.com/detalle/123456789"
+        },
+        "fotocasa": {
+            "state": "12",
+            "message": "Successfully deactivated."
+        },
+        ...
+    },
+    "leads": [
+        {
+            "date": "2025-08-22 10:08:55",
+            "language": "es_ES",
+            "source": "idealista.com",
+            "contact_firstname": "Name",
+            "contact_lastname": "Lastname",
+            "contact_phone": "+34 123456789",
+            "contact_mobile": "",
+            "contact_email": "example@email.com",
+            "message": "Message text example. \n Hello, I'm interested in this property."
+        },
+        ...
+    ]
+]
+             </code></pre>
+
+            <p class="subtitulo">Campos:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 22%">Parámetro</th>
+                    <th style="width: 18%">Tipo</th>
+                    <th style="width: 60%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>publishinfo</td>
+                        <td>array</td>
+                        <td class="info">Contiene los portales donde está publicada la propiedad actualmente.</td>
+                    </tr>
+                    <tr>
+                        <td>publishinfo/state</td>
+                        <td>int</td>
+                        <td class="info">Indica el estado actual de la publicación de la propiedad en el portal asociado.</td>
+                    </tr>
+                    <tr>
+                        <td>publishinfo/message</td>
+                        <td>texto</td>
+                        <td class="info">Indica el último mensaje que devolvió el proceso al publicar la propiedad.</td>
+                    </tr>
+                    <tr>
+                        <td>publishinfo/alerts_number</td>
+                        <td>int</td>
+                        <td class="info">Indica la cantidad de cruces que se han realizado con el portal. (Exclusivo de idealista)</td>
+                    </tr>
+                    <tr>
+                        <td>publishinfo/quality_percentage</td>
+                        <td>int</td>
+                        <td class="info">Indica la calidad del anuncio publicado. (Exclusivo de idealista)</td>
+                    </tr>
+                    <tr>
+                        <td>publishinfo/publication_url</td>
+                        <td>texto</td>
+                        <td class="info">Url de la ficha del anuncio en el portal específico. (No disponible para todos los portales)</td>
+                    </tr>
+                    <tr>
+                        <td>leads</td>
+                        <td>array</td>
+                        <td class="info">Contiene los leads recibidos para la propiedad consultada.</td>
+                    </tr>
+                    <tr>
+                        <td>leads/date</td>
+                        <td>string</td>
+                        <td class="info">La fecha en la que se ha recibido el lead.</td>
+                    </tr>
+                    <tr>
+                        <td>leads/language</td>
+                        <td>string</td>
+                        <td class="info">El idioma del lead en formato ISO.</td>
+                    </tr>
+                    <tr>
+                        <td>leads/source</td>
+                        <td>string</td>
+                        <td class="info">El medio por el que ha llegado el lead.</td>
+                    </tr>
+                    <tr>
+                        <td>leads/contact_firstname</td>
+                        <td>string</td>
+                        <td class="info">El nombre de la persona que ha contactado.</td>
+                    </tr>
+                    <tr>
+                        <td>leads/contact_lastname</td>
+                        <td>string</td>
+                        <td class="info">El apellido de la persona que ha contactado.</td>
+                    </tr>
+                    <tr>
+                        <td>leads/contact_phone</td>
+                        <td>string</td>
+                        <td class="info">El teléfono fijo de contacto del lead correspondiente.</td>
+                    </tr>
+                    <tr>
+                        <td>leads/contact_mobile</td>
+                        <td>string</td>
+                        <td class="info">El teléfono móvil de contacto del lead correspondiente.</td>
+                    </tr>
+                    <tr>
+                        <td>leads/contact_email</td>
+                        <td>string</td>
+                        <td class="info">El mail de contacto del lead correspondiente.</td>
+                    </tr>
+                    <tr>
+                        <td>leads/message</td>
+                        <td>string</td>
+                        <td class="info">El mensaje o anotación del lead correspondiente.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="subtitulo">Valores:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 22%">Campo</th>
+                    <th style="width: 18%">Valor</th>
+                    <th style="width: 60%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>state</td>
+                    <td>10</td>
+                    <td class="info">Propiedad publicada correctamente.</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>11</td>
+                    <td class="info">Propiedad publicada en el microsite.</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>12</td>
+                    <td class="info">Propiedad no publicada.</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>7</td>
+                    <td class="info">Propiedad publicada, pero con una alerta.</td>
+                </tr>
+                <tr>
+                    <td>state</td>
+                    <td>9</td>
+                    <td class="info">Propiedad no publicada por un error.</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+            <h3 id="leadsPropiedad">Leads <span class="metodo get">GET</span></h3>
+            <code class="url">/propiedades/?leads&amp;dateStart={dateStart}&amp;dateEnd={dateEnd}&amp;page={page}</code>
+
+            <p>Pode obter os leads de uma agência filtrando por data. Serão devolvidos no máximo 10 resultados por página. Pode consultar qualquer página utilizando o parâmetro page.</p>
+
+            <p class="subtitulo">Parametros:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 10%">Parámetro</th>
+                    <th style="width: 85%">Descripción</th>
+                    <th style="width: 5%">Prioridad</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>dateStart</td>
+                    <td class="info">Fecha desde la que se quieren obtener los leads.</td>
+                    <td>Alta</td>
+                </tr>
+                <tr>
+                    <td>dateEnd</td>
+                    <td class="info">Fecha desde la que se quieren obtener los leads.</td>
+                    <td>Alta</td>
+                </tr>
+                <tr>
+                    <td>page</td>
+                    <td class="info">Página de resultados que se quiere consultar.</td>
+                    <td>Alta</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+[
+
+    "leads": [
+        {
+            "date": "2025-08-22 10:08:55",
+            "language": "es_ES",
+            "source": "idealista.com",
+            "contact_firstname": "Name",
+            "contact_lastname": "Lastname",
+            "contact_phone": "+34 123456789",
+            "contact_mobile": "",
+            "contact_email": "example@email.com",
+            "message": "Message text example. \n Hello, I'm interested in this property."
+        },
+        ...
+    ]
+]
+             </code></pre>
+
+            <p class="subtitulo">Campos:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 22%">Parámetro</th>
+                    <th style="width: 18%">Tipo</th>
+                    <th style="width: 60%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td>leads</td>
+                    <td>array</td>
+                    <td class="info">Contiene los leads recibidos para la propiedad consultada.</td>
+                </tr>
+                <tr>
+                    <td>leads/date</td>
+                    <td>string</td>
+                    <td class="info">La fecha en la que se ha recibido el lead.</td>
+                </tr>
+                <tr>
+                    <td>leads/language</td>
+                    <td>string</td>
+                    <td class="info">El idioma del lead en formato ISO.</td>
+                </tr>
+                <tr>
+                    <td>leads/source</td>
+                    <td>string</td>
+                    <td class="info">El medio por el que ha llegado el lead.</td>
+                </tr>
+                <tr>
+                    <td>leads/contact_firstname</td>
+                    <td>string</td>
+                    <td class="info">El nombre de la persona que ha contactado.</td>
+                </tr>
+                <tr>
+                    <td>leads/contact_lastname</td>
+                    <td>string</td>
+                    <td class="info">El apellido de la persona que ha contactado.</td>
+                </tr>
+                <tr>
+                    <td>leads/contact_phone</td>
+                    <td>string</td>
+                    <td class="info">El teléfono fijo de contacto del lead correspondiente.</td>
+                </tr>
+                <tr>
+                    <td>leads/contact_mobile</td>
+                    <td>string</td>
+                    <td class="info">El teléfono móvil de contacto del lead correspondiente.</td>
+                </tr>
+                <tr>
+                    <td>leads/contact_email</td>
+                    <td>string</td>
+                    <td class="info">El mail de contacto del lead correspondiente.</td>
+                </tr>
+                <tr>
+                    <td>leads/message</td>
+                    <td>string</td>
+                    <td class="info">El mensaje o anotación del lead correspondiente.</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+        <div class="contenedorBloque">
+            <h2 id="propietarios">Propietarios</h2>
+            <h3 id="solicitarPropietario">Solicitar Propietario <span class="metodo get">GET</span></h3>
+            <code class="url">/propietarios/?cod_cli={cod_cli}</code>
+
+            <p>Para obtener un propietario puede solicitarse de varias maneras, pudiendo enviar varios parámetros. En la siguiente tabla se detallan las distintas posibilidades. La prioridad se utiliza si se envían varios parámetros, en este caso el sistema dará más importancia a los parámetros de prioridad alta.</p>
+
+            <p class="subtitulo">Parametros:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 10%">Parámetro</th>
+                    <th style="width: 85%">Descripción</th>
+                    <th style="width: 5%">Prioridad</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>cod_cli</td>
+                    <td class="info">Código único del propietario en cuestión.</td>
+                    <td>Alta</td>
+                </tr>
+                <tr>
+                    <td>cod_ofer</td>
+                    <td class="info">Código único de la propiedad de la que se quiere obtener el propietario.</td>
+                    <td>Media</td>
+                </tr>
+                <tr>
+                    <td>ref</td>
+                    <td class="info">Puede solicitarse con la referencia de la propiedad de la que se quiere obtener el propietario.</td>
+                    <td>Baja</td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+{
+    "cod_cli": "13449756",
+    "nombre": "Pedro",
+    "apellidos": "Picapiedra",
+    "nif": "Z7347280G",
+    "email": "pedro@picapiedra.com",
+    "calle": "Av. Libertad",
+    "numero": "123",
+    "planta": "3",
+    "puerta": "der",
+    "escalera": "3",
+    "cp": "03201",
+    "localidad": "Elche",
+    "provincia": "Alicante",
+    "pais": "España",
+    "nacionalidad": "Española",
+    "telefono1": "666554433",
+    "telefono2": "666221100",
+    "telefono3": "",
+    "fechanacimiento": null,
+    "altacliente": "2018-03-01 12:53:25",
+    "facebook": null,    
+    "conyuge": "Vilma Picapiedra",
+    "conemail": "vilma@picapiedra.com",
+    "connif": "Y4752447V",
+    "propiedades": [
+        {
+            "cod_ofer": "5288705",
+            "ref": "00633",
+            "panel": "https:/www.haypisos.com/cliente/?cliente=01413_3617145288705",
+            "estadistica": "https:/www.haypisos.com/cliente/?estadistica=01413_3617145288705",
+            "disponible": true
+        },
+        {
+            "cod_ofer": "5426130",
+            "ref": "13748578",
+            "panel": "https:/www.haypisos.com/cliente/?cliente=01413_0917371754230",
+            "estadistica": "https:/www.haypisos.com/cliente/?estadistica=01413_0917371754230",
+            "disponible": false
+        },
+        ...
+}
+             </code>
+            </pre>
+
+
+
+
+
+
+
+
+
+            <h3 id="crearPropietario">Crear Propietario <span class="metodo post">POST</span></h3>
+            <code class="url">/propietarios/</code>
+
+            <p>Para crear un propietario es requerido enviar el código <u>(cod_ofer)</u> de la propiedad relacionada.</p>
+
+            <p class="subtitulo">Petición:</p>
+            <pre>             <code class="codigo">
+{
+  "nombre": "Pedro",
+  "apellidos": "Picapiedra",
+  "nif": "12345678K",
+  "email": "pedro.picapiedra@inmovilla.com",
+  "telefono1": 666554433,
+  "telefono2": 666221100,
+  "telefono2": 666001122,  
+  "cod_ofer": 12345678
+}
+             </code>
+            </pre>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 201 Created
+{
+    "cod_cli":11223344,
+    "codigo": 201,
+    "mensaje": "Propietario creado y vinculado a la propiedad con cod_ofer 12345678"
+}
+             </code>
+            </pre>
+
+
+
+
+
+            <h3 id="editarPropietario">Editar Propietario <span class="metodo put">PUT</span></h3>
+            <code class="url">/propietarios/</code>
+
+            <p>Para editar/actualizar un propietario es obligatorio enviar el código del mismo <u>(cod_cli)</u>. Sólo debe enviarse los campos que se van a modificar o añadir, en el ejemplo siguiente actualizaremos la dirección de email.</p>
+
+            <p class="subtitulo">Petición:</p>
+            <pre>             <code class="codigo">
+{
+  "cod_cli": 11223344,    
+  "email": "pedro.picapiedra.gomez@inmovilla.com"                                                 
+}
+             </code>
+            </pre>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 202 Accepted
+{
+    "cod_cli":11223344,
+    "codigo": 202,
+    "mensaje": "Propietario actualizado"
+}
+             </code>
+            </pre>
+
+
+
+
+
+            <h3 id="eliminarPropietario">Eliminar Propietario <span class="metodo delete">DELETE</span></h3>
+            <code class="url">/propietarios/{cod_cli}</code>
+
+            <p>Para eliminar un propietario tan sólo es necesario hacer la petición DELETE a la url de propietarios con el identificador del mismo (<u>cod_cli</u>). El sistema avisará si dicho propietario está vinculado con alguna propiedad o demanda, en dicho caso no se eliminará el propietario, ya que antes habrá que desvincularlo.</p>
+
+            <p class="subtitulo">Respuesta:</p>
+            <pre>             <code class="codigo">
+HTTP/1.0 200 OK
+{
+    "codigo": 200,
+    "mensaje": "Propietario eliminado"
+}
+             </code>
+            </pre>
+
+            <p class="subtitulo" id="camposPropietarios">Campos:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 22%">Campo</th>
+                    <th style="width: 12%">Tipo</th>
+                    <th style="width: 60%">Descripción</th>
+                    <th style="width: 6%">Requerido en</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr>
+                    <td>cod_cli</td>
+                    <td>numérico</td>
+                    <td class="info">Identificador único</td>
+                    <td><span class="metodo get">GET</span><span class="metodo put">PUT</span><span class="metodo delete">DELETE</span></td>
+                </tr>
+                    
+                <tr>
+                    <td>cod_ofer</td>
+                    <td>numérico</td>
+                    <td class="info">Identificador único de la propiedad vinculada</td>
+                    <td><span class="metodo post">POST</span></td>
+                </tr>
+                    
+                <tr>
+                    <td>nombre</td>
+                    <td>texto</td>
+                    <td class="info">Nombre del propietario</td>
+                    <td><span class="metodo post">POST</span></td>
+                </tr>
+                    
+                <tr>
+                    <td>apellidos</td>
+                    <td>texto</td>
+                    <td class="info">Apellidos del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>nif</td>
+                    <td>texto</td>
+                    <td class="info">NIF / DNI / CIF</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>email</td>
+                    <td>texto</td>
+                    <td class="info">Dirección de Email / Correo electrónico</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>calle</td>
+                    <td>texto</td>
+                    <td class="info">Nombre de la dirección del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>numero</td>
+                    <td>texto</td>
+                    <td class="info">Número de la dirección del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>planta</td>
+                    <td>numérico</td>
+                    <td class="info">Nº de planta de la dirección del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>puerta</td>
+                    <td>texto</td>
+                    <td class="info">Puerta de la dirección del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>escalera</td>
+                    <td>texto</td>
+                    <td class="info">Escalera de la dirección del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>cp</td>
+                    <td>texto</td>
+                    <td class="info">Código Postal</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>localidad</td>
+                    <td>texto</td>
+                    <td class="info">Localidad / Ciudad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>provincia</td>
+                    <td>texto</td>
+                    <td class="info">Provincia</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>pais</td>
+                    <td>texto</td>
+                    <td class="info">Pais del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>nacionalidad</td>
+                    <td>texto</td>
+                    <td class="info">Nacionalidad</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>telefono1</td>
+                    <td>numérico</td>
+                    <td class="info">Teléfono principal</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>prefijotel1</td>
+                    <td>numérico</td>
+                    <td class="info">Prefijo teléfono fijo</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>prefijotel2</td>
+                    <td>numérico</td>
+                    <td class="info">Prefijo teléfono móvil</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>telefono2</td>
+                    <td>numérico</td>
+                    <td class="info">Otro teléfono</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>telefono3</td>
+                    <td>numérico</td>
+                    <td class="info">Otro teléfono</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>prefijotel3</td>
+                    <td>numérico</td>
+                    <td class="info">Prefijo otro teléfono</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>fechanacimiento</td>
+                    <td>fecha</td>
+                    <td class="info">Fecha de Nacimiento (Formato 1984-09-05 23:25:00)</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>altacliente</td>
+                    <td>fecha</td>
+                    <td class="info">Fecha de alta del propietario</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>conyuge</td>
+                    <td>texto</td>
+                    <td class="info">Nombre del Cónyuge</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>conemail</td>
+                    <td>texto</td>
+                    <td class="info">Dirección de Email del Cónyuge</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>connif</td>
+                    <td>texto</td>
+                    <td class="info">NIF del Cónyuge</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>observacion</td>
+                    <td>texto</td>
+                    <td class="info">Observaciones</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>nonewsletters</td>
+                    <td>numérico</td>
+                    <td class="info">Newsletters: 0 Pendiente - 3 Validado Oficina - 1 Rechazado - 6 Fallo Entrega</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>gesauto</td>
+                    <td>numérico</td>
+                    <td class="info">Envío de prop. por email: 0 Pendiente - 2 Validado Oficina - 4 Rechazado - 5 Validado Portal - 6 Fallo Entrega</td>
+                    <td></td>
+                </tr>
+                    
+                <tr>
+                    <td>rgpdwhats</td>
+                    <td>numérico</td>
+                    <td class="info">Envío de prop. por Whatsapp: 0 Pendiente - 2 Validado Oficina - 4 Rechazado - 5 Validado Portal - 6 Fallo Entrega</td>
+                    <td></td>
+                </tr>
+                                    </tbody>
+            </table>
+
+
+
+            <p class="subtitulo" id="erroresPropietarios">Posibles errores:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 5%">Error</th>
+                    <th style="width: 8%">Código</th>
+                    <th style="width: 32%">Error</th>
+                    <th style="width: 55%">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>400</td>
+                    <td>400001</td>
+                    <td>Petición Errónea</td>
+                    <td class="info">Petición mal formada, comprueba que el contenido ha sido bien parseado.</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>400002</td>
+                    <td>Petición Errónea</td>
+                    <td class="info">No se han enviado parámetros.</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>400003</td>
+                    <td>Error al guardar</td>
+                    <td class="info">Ha ocurrido un error al crear, editar o eliminar el propietario</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>404001</td>
+                    <td>Sin resultados</td>
+                    <td class="info">No existe ninguna propiedad con el identificador solicitado.</td>
+                </tr>
+                <tr>
+                    <td>405</td>
+                    <td>405001</td>
+                    <td>Método no permitido</td>
+                    <td class="info">El método solicitado no está disponible (GET, POST, PUT, DELETE, etc.)</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406001</td>
+                    <td>Campo {x} requerido</td>
+                    <td class="info">El campo {x} es obligatorio y no ha sido enviado.</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406002</td>
+                    <td>Campo {x} no válido</td>
+                    <td class="info">El campo {x} no es válido o está mal escrito.</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406004</td>
+                    <td>Propietario vinculado</td>
+                    <td class="info">El propietario tiene algún vínculo y no se puede eliminar</td>
+                </tr>
+                <tr>
+                    <td>406</td>
+                    <td>406006</td>
+                    <td>Código no existe</td>
+                    <td class="info">El código {x} facilitado no existe</td>
+                </tr>
+                <tr>
+                    <td>408</td>
+                    <td>408</td>
+                    <td>Demasiadas peticiones</td>
+                    <td class="info">Límite de 20 peticiones de propietarios cada minuto</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+        <div class="contenedorBloque">
+            <h2 id="limitePeticiones">Límites por tipo de petición</h2>
+
+            <p>Todo tipo de petición tiene asignado un límite de peticiones por intervalo de tiempo para no saturar al servidor y así poder ofrecer a los clientes un tiempo de respuesta correcto en cada una de ellas. A continuación, dispones de una tabla donde se indican estos límites para que vuestros scripts los tengan en cuenta.</p>
+
+            <p class="subtitulo">Tabla de límites:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 18%">Tipo</th>
+                    <th style="width: 22%">Intervalo</th>
+                    <th style="width: 15%">Peticiones Max.</th>
+                    <th style="width: 45%">Tipo Error</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>enums</td>
+                    <td class="info">Cada minuto</td>
+                    <td style="text-align: center;">2</td>
+                    <td>Cod. 408</td>
+                </tr>
+                <tr>
+                    <td>enums</td>
+                    <td class="info">Cada 10 minutos</td>
+                    <td style="text-align: center;">10</td>
+                    <td>Cod. 408</td>
+                </tr>
+                <tr>
+                    <td>clientes</td>
+                    <td class="info">Cada minuto</td>
+                    <td style="text-align: center;">20</td>
+                    <td>Cod. 408</td>
+                </tr>
+                <tr>
+                    <td>clientes</td>
+                    <td class="info">Cada 10 minutos</td>
+                    <td style="text-align: center;">100</td>
+                    <td>Cod. 408</td>
+                </tr>
+                <tr>
+                    <td>propiedades</td>
+                    <td class="info">Cada minuto</td>
+                    <td style="text-align: center;">10</td>
+                    <td>Cod. 408</td>
+                </tr>
+                <tr>
+                    <td>propiedades</td>
+                    <td class="info">Cada 10 minutos</td>
+                    <td style="text-align: center;">50</td>
+                    <td>Cod. 408</td>
+                </tr>
+                <tr>
+                    <td>propietarios</td>
+                    <td class="info">Cada minuto</td>
+                    <td style="text-align: center;">20</td>
+                    <td>Cod. 408</td>
+                </tr>
+                <tr>
+                    <td>propietarios</td>
+                    <td class="info">Cada 10 minutos</td>
+                    <td style="text-align: center;">100</td>
+                    <td>Cod. 408</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+</body></html>
