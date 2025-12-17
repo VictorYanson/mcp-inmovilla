@@ -1,4 +1,4 @@
-import { MCPServer } from "mcp-framework";
+import { MCPServer, APIKeyAuthProvider } from "mcp-framework";
 import * as dotenv from 'dotenv';
 import { config } from 'dotenv';
 import { fileURLToPath } from 'url';
@@ -15,6 +15,11 @@ if (!apiKey) {
   throw new Error("API key not found");
 }
 
+const mcpApiKey = process.env.MCP_API_KEY;
+if (!mcpApiKey) {
+  throw new Error("MCP_API_KEY not found");
+}
+
 const server = new MCPServer({
   transport: {
     type: "http-stream",
@@ -23,6 +28,11 @@ const server = new MCPServer({
       cors: {
         allowOrigin: "*"
       }
+    },
+    auth: {
+      provider: new APIKeyAuthProvider({
+        keys: [mcpApiKey]
+      })
     }
   }
 });

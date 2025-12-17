@@ -19,7 +19,12 @@ if not OPENAI_API_KEY:
     print("Error: OPENAI_API_KEY not found in .env file")
     sys.exit(1)
 
-MCP_SERVER_URL = "http://localhost:1337/mcp"
+MCP_API_KEY = os.getenv("MCP_API_KEY")
+if not MCP_API_KEY:
+    print("Error: MCP_API_KEY not found in .env file")
+    sys.exit(1)
+
+MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "http://16.16.145.38:1337/mcp")
 
 async def main():
     # Initialize OpenAI client
@@ -32,7 +37,7 @@ async def main():
             # Connect to MCP server via Streamable HTTP
             # streamablehttp_client returns (read_stream, write_stream, session_id)
             read_stream, write_stream, _ = await stack.enter_async_context(
-                streamablehttp_client(MCP_SERVER_URL)
+                streamablehttp_client(MCP_SERVER_URL, headers={"X-API-Key": MCP_API_KEY})
             )
 
             session = await stack.enter_async_context(
