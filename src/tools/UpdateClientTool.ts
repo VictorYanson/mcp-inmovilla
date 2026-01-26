@@ -103,6 +103,8 @@ class UpdateClientTool extends MCPTool<UpdateClientInput> {
             throw new Error("INMOVILLA_API_TOKEN environment variable is not set");
         }
 
+        console.log("calling API PUT /clientes/")
+
         const response = await this.fetch<any>(url, {
             method: "PUT",
             headers: {

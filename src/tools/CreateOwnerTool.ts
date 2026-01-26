@@ -103,6 +103,7 @@ class CreateOwnerTool extends MCPTool<CreateOwnerInput> {
             throw new Error("INMOVILLA_API_TOKEN environment variable is not set");
         }
 
+        console.log("calling api POST /propietarios/")
         const response = await this.fetch<any>(url, {
             method: "POST",
             headers: {

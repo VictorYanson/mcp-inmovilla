@@ -25,6 +25,7 @@ if not MCP_API_KEY:
     sys.exit(1)
 
 MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "http://16.16.145.38:1337/mcp")
+#MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "http://0.0.0.0:1337/mcp")
 
 async def main():
     # Initialize OpenAI client
@@ -68,7 +69,19 @@ async def main():
                 })
 
             messages = [
-                {"role": "system", "content": "You are a helpful assistant with access to tools. Use them when needed."}
+                {
+                    "role": "system", 
+                    "content": (
+                        "You are a helpful real estate assistant with access to Inmovilla API tools. "
+                        "Follow these rules for efficient tool usage:\n"
+                        "1. **Tool Chaining**: Many tasks require multiple steps. For example, to find neighborhoods (zonas) in a city, "
+                        "first use `search_cities` to get the `key_loca` (city code), then use `get_enum` with `type='zonas'` and `param=key_loca`.\n"
+                        "2. **Context Management**: Some tools like `list_properties` return a lot of data. Be careful and only call them when necessary. "
+                        "If a tool returns too much data, try to be more specific in your next steps.\n"
+                        "3. **Data Retrieval**: Always look for codes (IDs) in tool outputs to use as parameters for other tools.\n"
+                        "4. **Proactive Assistance**: If a user asks for something that requires multiple steps, explain what you are doing as you chain the tools."
+                    )
+                }
             ]
 
             print("\n--- Chat Session Started (type 'quit' to exit) ---")
@@ -102,23 +115,27 @@ async def main():
                             print(f"Calling tool: {function_name} with args: {function_args}")
                             
                             # Execute tool on MCP server
-                            result: CallToolResult = await session.call_tool(
-                                function_name,
-                                function_args
-                            )
-                            
-                            # Format result for OpenAI
-                            # MCP returns a list of content (TextContent or ImageContent)
-                            # We'll concatenate text content for simplicity
-                            tool_output = ""
-                            if not result.isError:
-                                for content in result.content:
-                                    if content.type == "text":
-                                        tool_output += content.text
-                                    elif content.type == "image":
-                                        tool_output += "[Image content returned]"
-                            else:
-                                tool_output = f"Error: {result.content}"
+                            try:
+                                result: CallToolResult = await session.call_tool(
+                                    function_name,
+                                    function_args
+                                )
+                                
+                                # Format result for OpenAI
+                                # MCP returns a list of content (TextContent or ImageContent)
+                                # We'll concatenate text content for simplicity
+                                tool_output = ""
+                                if not result.isError:
+                                    for content in result.content:
+                                        if content.type == "text":
+                                            tool_output += content.text
+                                        elif content.type == "image":
+                                            tool_output += "[Image content returned]"
+                                else:
+                                    tool_output = f"Error: {result.content}"
+                            except Exception as e:
+                                tool_output = f"Error executing tool: {str(e)}"
+                                print(f"  Error executing tool {function_name}: {e}")
 
                             print(f"Tool Output: {tool_output[:100]}..." if len(tool_output) > 100 else f"Tool Output: {tool_output}")
 

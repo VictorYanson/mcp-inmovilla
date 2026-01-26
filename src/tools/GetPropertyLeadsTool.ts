@@ -40,6 +40,8 @@ class GetPropertyLeadsTool extends MCPTool<GetPropertyLeadsInput> {
             throw new Error("INMOVILLA_API_TOKEN environment variable is not set");
         }
 
+        console.log("calling API GET propiedades/leads")
+
         const response = await this.fetch<any>(url, {
             method: "GET",
             headers: {

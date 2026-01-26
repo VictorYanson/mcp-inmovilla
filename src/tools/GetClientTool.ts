@@ -23,6 +23,8 @@ class GetClientTool extends MCPTool<GetClientInput> {
             throw new Error("INMOVILLA_API_TOKEN environment variable is not set");
         }
 
+        console.log("calling api GET /clientes/cod_cli")
+
         const response = await this.fetch<any>(url, {
             method: "GET",
             headers: {

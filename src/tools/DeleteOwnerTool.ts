@@ -23,6 +23,8 @@ class DeleteOwnerTool extends MCPTool<DeleteOwnerInput> {
             throw new Error("INMOVILLA_API_TOKEN environment variable is not set");
         }
 
+        console.log("calling api DELETE /propietarios/cod_cli")
+
         const response = await this.fetch<any>(url, {
             method: "DELETE",
             headers: {

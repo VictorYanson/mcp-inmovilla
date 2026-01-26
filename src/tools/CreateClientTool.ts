@@ -104,6 +104,7 @@ class CreateClientTool extends MCPTool<CreateClientInput> {
             throw new Error("INMOVILLA_API_TOKEN environment variable is not set");
         }
 
+        console.log("calling api POST /clientes/")
         const response = await this.fetch<CreateClientResponse>(url, {
             method: "POST",
             headers: {
@@ -112,6 +113,7 @@ class CreateClientTool extends MCPTool<CreateClientInput> {
             },
             body: JSON.stringify(input),
         });
+
 
         return response;
     }

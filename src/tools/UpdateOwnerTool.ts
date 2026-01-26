@@ -103,6 +103,8 @@ class UpdateOwnerTool extends MCPTool<UpdateOwnerInput> {
             throw new Error("INMOVILLA_API_TOKEN environment variable is not set");
         }
 
+        console.log("calling API PUT /propietarios/")
+
         const response = await this.fetch<any>(url, {
             method: "PUT",
             headers: {

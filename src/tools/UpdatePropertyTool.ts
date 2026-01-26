@@ -72,6 +72,8 @@ class UpdatePropertyTool extends MCPTool<UpdatePropertyInput> {
             throw new Error("INMOVILLA_API_TOKEN environment variable is not set");
         }
 
+        console.log("calling API POST /propiedades/")
+
         const response = await this.fetch<any>(url, {
             method: "POST",
             headers: {

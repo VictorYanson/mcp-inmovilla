@@ -8,15 +8,15 @@ interface GetEnumInput {
 
 class GetEnumTool extends MCPTool<GetEnumInput> {
     name = "get_enum";
-    description = "Get enum values for various categories (calidades, tipos, paises, ciudades, zonas)";
+    description = "Get enum values for various categories (calidades, tipos, paises, ciudades, zonas). For 'zonas' (neighborhoods), you MUST provide the city code (key_loca) in the 'param' field. You can find this code using the 'search_cities' tool.";
     schema = {
         type: {
             type: z.enum(["calidades", "tipos", "paises", "ciudades", "zonas"]),
-            description: "The type of enum to retrieve",
+            description: "The type of enum to retrieve. Use 'zonas' to find neighborhoods within a city.",
         },
         param: {
             type: z.string().optional(),
-            description: "Optional parameter for specific queries (e.g., specific type, country code for cities, city code for zones)",
+            description: "Optional parameter. For 'zonas', this MUST be the numeric 'key_loca' of the city.",
         },
     };
 
@@ -30,6 +30,8 @@ class GetEnumTool extends MCPTool<GetEnumInput> {
         if (!token) {
             throw new Error("INMOVILLA_API_TOKEN environment variable is not set");
         }
+
+        console.log("calling api GET /enums/?type")
 
         const response = await this.fetch<any>(url, {
             method: "GET",
