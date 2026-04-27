@@ -23,6 +23,7 @@ const server = new MCPServer({
   transport: {
     type: "http-stream",
     options: {
+      host: "0.0.0.0",
       port: 1337,
       cors: {
         allowOrigin: "*"

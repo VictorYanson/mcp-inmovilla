@@ -25,7 +25,8 @@ if not MCP_API_KEY:
     sys.exit(1)
 
 # MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "http://16.16.145.38:1337/mcp")
-MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "http://localhost:1337/mcp")
+MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "https://mcp-inmovilla-production.up.railway.app/mcp")
+# MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "http://localhost:1337/mcp")
 
 async def main():
     # Initialize OpenAI client
@@ -40,8 +41,6 @@ async def main():
             read_stream, write_stream, _ = await stack.enter_async_context(
                 streamablehttp_client(MCP_SERVER_URL, headers={"X-API-Key": MCP_API_KEY})
             )
-
-            print(read_stream, write_stream, _)
 
             session = await stack.enter_async_context(
                 ClientSession(read_stream, write_stream)
