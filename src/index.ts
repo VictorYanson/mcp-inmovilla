@@ -1,5 +1,4 @@
 import { MCPServer, APIKeyAuthProvider } from "mcp-framework";
-import * as dotenv from 'dotenv';
 import { config } from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';

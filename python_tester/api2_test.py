@@ -45,6 +45,7 @@ def run_automated_search(city_id):
     # --- 2. GET TOKENS ---
     panel_response = session.get("https://crm.inmovilla.com/panel/")
     tokens = extract_tokens_from_html(panel_response.text)
+    print(f"API token: {tokens}")
     
     if not tokens:
         return "Failed to extract tokens."
