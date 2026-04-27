@@ -103,13 +103,11 @@ async def main():
 
                                         # Send the tool result back to Gemini
                                         response = chat.send_message(
-                                            genai.types.Content(
-                                                parts=[
-                                                    genai.types.Part.from_function_response(
-                                                        name=fn_name,
-                                                        response={'result': tool_output_text}
-                                                    )
-                                                ]
+                                            genai.protos.Part(
+                                                function_response=genai.protos.FunctionResponse(
+                                                    name=fn_name,
+                                                    response={'result': tool_output_text}
+                                                )
                                             )
                                         )
 
